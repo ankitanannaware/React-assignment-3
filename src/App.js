@@ -1,13 +1,13 @@
 import logo from './logo.svg';
 import './App.css';
-import User from './todo/User'
-import View from './todo/View'
+import AddUser from './Assignment-3/AddUser'
+
+
 
 function App() {
   return (
     <div className="App">
-      <User/>
-      <View/>
+      <AddUser/>
     </div>
   );
 }
