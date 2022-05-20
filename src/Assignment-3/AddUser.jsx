@@ -1,6 +1,6 @@
 import {Form ,FormGroup,Label,Input,Button,Badge} from 'reactstrap'
 import ViewUser from './ViewUser'
-import {useRef, useState} from 'react'
+import {useEffect, useRef, useState} from 'react'
 import NewModal from './NewModal'
 const AddUser=()=>{
    const [username,setUsername] = useState("")
@@ -10,6 +10,22 @@ const AddUser=()=>{
    const [isError,setIsError] = useState(false)
    const usernameRef= useRef()
    const ageRef= useRef()
+
+   useEffect(()=>{
+      // console.log("inside useEffect")
+      // const savedUsers=localStorage.getItem("users")
+      // console.log(JSON.parse(savedUsers))
+      // setUsers(JSON.parse(savedUsers))
+
+      // fetch('https://jsonplaceholder.typicode.com/todos')
+      //   .then(response => response.json())
+      //   .then(json => {
+      //      setUsers(json)
+      //   })
+   },[])
+   useEffect(()=>{
+       console.log("hello from change")
+   },[username])
 
    const usernameChangeHandler=(event)=>{
          console.log(usernameRef.current.value)
@@ -34,6 +50,7 @@ const AddUser=()=>{
             age:age
          }
          setUsers([...users,user])
+         localStorage.setItem("users",JSON.stringify([...users,user]))
       }else{
          // console.log("error")
          if(username.length<=0 && age==0){
@@ -89,7 +106,7 @@ const AddUser=()=>{
         {
            users.map(user=>{
               return(
-               <ViewUser user={user}/>
+               <ViewUser user={user} key={user.username}/>
               )
            })
         }
